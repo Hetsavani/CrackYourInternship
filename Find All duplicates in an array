@@ -1,0 +1,12 @@
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        Set<Integer> num = new HashSet<>();
+        for(int n : nums){
+            if(!set.add(n)){
+                num.add(n);
+            }
+        }
+        return new LinkedList<>(num);
+    }
+}
