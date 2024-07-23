@@ -1,0 +1,54 @@
+class Solution {
+    public void gameOfLife(int[][] board) {
+        int m = board.length;
+        int n = board[0].length;
+        int[][] ans = new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                ans[i][j] = helper(board,i,j);
+                // System.out.println(i+" , "+j+" , "+ans[i][j]);
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            // System.out.println(Arrays.toString(ans[i]));
+            board[i] = Arrays.copyOf(ans[i], ans[i].length);
+            // System.out.println(Arrays.toString(board[i]));
+        }
+    }
+    public int helper(int[][] board,int i,int j){ // 3 1
+        int count = 0;
+        int m = board.length;
+        int n = board[0].length;
+        for(int x=-1;x<=1;x++){
+                if((i-1)>=0 && (j+x)>=0 && (j+x)<n && board[i-1][j+x] == 1){
+                    count++;
+                }
+                if((j+x)>=0 && (j+x)<n && board[i][j+x] == 1){
+                    if(x != 0)
+                    count++;
+                    // System.out.println("efrgthyu1");
+                }
+                // System.out.println((i+1)+" , "+(j+x)+" , ");
+                if((i+1)<m && (j+x)>=0 && (j+x)<n && board[i+1][j+x] == 1){
+                    count++;
+                    // System.out.println("efrgthyu");
+                }
+            }
+            // System.out.println(count);
+        if(board[i][j] == 1){
+            if(count < 2){
+                return 0;
+            }else if(count == 2 || count == 3){
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            if(count == 3){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
+}
