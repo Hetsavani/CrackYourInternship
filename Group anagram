@@ -1,0 +1,66 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> anagramMap = new HashMap<>();
+
+        for (String str : strs) {
+            char[] charArray = str.toCharArray();
+            Arrays.sort(charArray);
+            String sortedStr = new String(charArray);
+
+            anagramMap.putIfAbsent(sortedStr, new ArrayList<>());
+            anagramMap.get(sortedStr).add(str);
+        }
+
+        return new ArrayList<>(anagramMap.values());
+    }
+}
+// class Solution {
+//     public List<List<String>> groupAnagrams(String[] strs) {
+//         List<List<String>> ans = new LinkedList<>();
+//         if(strs.length == 0) return ans;
+//         int cur = 0;
+//         List<String> temp1 = new LinkedList<>();
+//         temp1.add(strs[cur]);
+//         ans.add(temp1);
+//         cur++;
+//         while(cur<strs.length){
+//             boolean isThere = false;
+//             for(int i=0;i<ans.size();i++){
+//                 if(isAnagram(ans.get(i).get(0),strs[cur])){
+//                     ans.get(i).add(strs[cur]);
+//                     isThere = true;
+//                     break;
+//                 }
+//             }
+//             if(!isThere){
+//                 List<String> temp = new LinkedList<>();
+//                 temp.add(strs[cur]);
+//                 ans.add(temp);
+//             }
+//             cur++;
+//         }
+        
+//         return ans;
+//     }
+//     public boolean isAnagram(String str1,String str2){
+//         if(str1.length() != str2.length()){
+//             return false;
+//         }
+//         int[] count = new int[26];
+//         for(int i=0;i<str1.length();i++){
+//             count[str1.charAt(i)-'a']++;
+//             count[str2.charAt(i)-'a']--;
+//         }
+//         for(int i=0;i<26;i++){
+//             if(count[i]!=0){
+//                 return false;
+//             }
+//         }
+//         return true;
+//         // char[] one = str1.toCharArray();
+//         // char[] two = str2.toCharArray();
+//         // Arrays.sort(one);
+//         // Arrays.sort(two);
+//         // return Arrays.equals(one,two);
+//     }
+// }
