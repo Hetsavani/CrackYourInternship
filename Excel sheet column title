@@ -1,0 +1,21 @@
+class Solution {
+    public String convertToTitle(int columnNumber) {
+        String str = "";
+        // while(columnNumber > 0){
+        //     int n = (columnNumber%26)+65;
+        //     char c = (char)n;
+        //     str += c;
+        //     columnNumber /= 26;
+        // }
+        while(columnNumber >0){
+            columnNumber--;
+            int remainder = columnNumber % 26;
+            char c;
+            c = (char) (remainder + 'A');
+            columnNumber /= 26;
+            str = c + str;
+        }
+        
+        return str;
+    }
+}
